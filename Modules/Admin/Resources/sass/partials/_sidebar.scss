@@ -1,0 +1,44 @@
+.emcq-sidebar {
+  width: 200px;
+  border-right: 1px solid $d-gray-1;
+  background-color: $white;
+  display: none;
+  justify-content: center;
+
+  height: 100%;
+  @include min-md {
+    display: flex;
+  }
+  @include min-lg {
+    width: 250px;
+  }
+  .inner {
+    height: calc(100% - 138px);
+    overflow-y: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar-links {
+    padding-top: 40px;
+    padding-left: 0;
+    margin-bottom: 0; 
+    list-style: none;
+    .sidebar-nav-item {
+      margin-bottom: 30px;
+      .sidebar-nav-link {
+        color: $d-black-1;
+        i {
+          width: 30px;
+        }
+        &.active {
+          color: $d-gray-3;
+        }
+        &:hover {
+          text-decoration: none;
+          color: $d-gray-3;
+        }
+      }
+    }
+  }
+}

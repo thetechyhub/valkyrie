@@ -1,0 +1,13 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap');
+
+$body-bg: #F7F7F7;
+
+$fa-font-path:        "../webfonts";
+
+// fontawesome
+@import '~@fortawesome/fontawesome-pro/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-pro/scss/brands.scss';
+@import '~@fortawesome/fontawesome-pro/scss/light.scss';
+@import '~@fortawesome/fontawesome-pro/scss/regular.scss';
+@import '~@fortawesome/fontawesome-pro/scss/duotone.scss';

@@ -1,0 +1,372 @@
+body{
+  background: #f7f7ff;
+}
+
+.success-label {
+  background-color: $d-green-1;
+  border-radius: 0.5rem;
+  color: #f7f7f7;
+}
+
+.generic-bg {
+  background-color: $white;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  flex: 1;
+  &.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.logo-sliced {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: auto;
+  // @include min-sm {
+  //   width: 100px;
+  // }
+  @include min-md {
+    width: 10vw;
+  }
+}
+
+footer {
+  background-color: $black-2;
+  padding: 15px 30px;
+  height: 53px;
+  position: absolute;
+  width: 100%;
+  bottom: -53px;
+  left: 0;
+  // position: absolute;
+  // bottom: 0;
+  // width: 100%;
+  // left: 0;
+
+  p {
+    color: $white;
+    margin-bottom: 0;
+    text-align: center;
+  }
+}
+
+#student-app {
+  position: relative;
+}
+
+#teacher-app {
+  position: relative;
+}
+
+.n-c {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
+}
+
+.content {
+  padding: 20px 15px !important;
+  min-height: calc(100vh - 61px) !important;
+  h1 {
+    margin-top: 0;
+    font-size: 40px;
+    font-weight: bold;
+    color: $primary;
+  }
+}
+
+.icon-dark{
+	color: $dark;
+}
+.main-panel{
+  // overflow-x: hidden;
+  background-color: #e9eaec;
+}
+
+.page-title{
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: $primary;
+  background: #fff;
+  display: inline;
+  padding: 0.3rem 2.5rem 0.3rem;
+  border-radius: 25px;
+	box-shadow: 3px 2px 4px #dcdcdc;
+}
+
+.btn-back{
+	color: $primary;
+	margin-bottom: 1rem;
+	i{
+		padding-top: 0.5rem;
+    padding-right: 0.3rem;
+	}
+	a{
+		color: $primary;
+		padding-left: 0.3rem;
+		font-size: 1.2rem;
+		text-decoration: none;
+	}
+	&:hover{
+		opacity: 0.7;
+	}
+}
+
+.btn{
+	font-size: 0.9rem;
+
+	&.btn-primary, &.btn-info{
+		border-radius: 35px;
+		background: $primary;
+		border-color: $primary;
+		transition: opacity 0.5s ease;
+		padding: 0.4rem 2rem;
+		&:hover, &:active, &.active{
+			background-color: $primary !important;
+			border-color: $primary !important;
+			opacity: 0.5;
+		}
+	}
+
+	&.btn-danger{
+		border-radius: 35px;
+		background: $danger;
+		border-color: $danger;
+		transition: opacity 0.5s ease;
+		padding: 0.4rem 2rem;
+		&:hover, &:active, &.active{
+			background-color: $danger !important;
+			border-color: $danger !important;
+			opacity: 0.5;
+		}
+	}
+}
+
+.card{
+	border-color: #eee;
+  box-shadow: 4px 3px 4px 1px #eee;
+}
+
+
+.form-control[disabled], .form-control[readonly],
+fieldset[disabled] .form-control{
+	color: $dark;
+}
+
+.bootstrap-table .search{
+	width: 300px;
+}
+
+
+.custom-file-label{
+	border: 1px solid #eee !important;
+	box-shadow: none !important;
+}
+
+
+// .table-hover tbody tr:hover{
+//   background-color: $hover-state;
+//   td {
+//     color: $white;
+//   }
+// }
+
+
+.brand-btn {
+  @include no-appearance;
+  background-color: transparent;
+  color: $primary !important;
+  padding: 5px 15px;
+  border: 1px solid $primary;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: $primary;
+    color: $white !important;
+    text-decoration: none;
+  }
+  &.big-px {
+    @include min-sm {
+      padding: 10px 30px;
+      font-size: 16px;
+    }
+  }
+}
+
+.brand-btn-2 {
+  @include no-appearance;
+  background-color: $primary;
+  color: $white !important;
+  padding: 5px 15px;
+  border: 1px solid $primary;
+  transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease-in-out;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: transparent;
+    color: $primary !important;
+    text-decoration: none;
+    // border-radius: 20px;
+  }
+  &.big-px {
+    @include min-sm {
+      padding: 10px 30px;
+      font-size: 16px;
+    }
+  }
+}
+
+.brand-btn-success {
+  @include no-appearance;
+  background-color: $green;
+  color: $white !important;
+  padding: 5px 15px;
+  border: 1px solid $green;
+  transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease-in-out;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: transparent;
+    color: $green !important;
+    text-decoration: none;
+    // border-radius: 20px;
+  }
+  &.big-px {
+    @include min-sm {
+      padding: 10px 30px;
+      font-size: 16px;
+    }
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: gray;
+    border: 1px solid gray;
+    &:hover {
+      background-color: gray;
+      color: $white !important;
+    }
+  }
+}
+
+.brand-btn-danger {
+  @include no-appearance;
+  background-color: $danger;
+  color: $white !important;
+  padding: 5px 15px;
+  border: 1px solid $danger;
+  transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease-in-out;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background-color: transparent;
+    color: $danger !important;
+    text-decoration: none;
+    // border-radius: 20px;
+  }
+  &.big-px {
+    @include min-sm {
+      padding: 10px 30px;
+      font-size: 16px;
+    }
+  }
+}
+
+
+input[type=number] {
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.no-stretch {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.card-title {
+  font-weight: bold !important;
+  color: $primary !important;
+}
+
+.error-label{
+  background: #f50057;
+  border-radius: .5rem;
+  color: #f7f7f7;
+}
+
+
+button {
+  font-family: $font-family-sans-serif !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  opacity: 0;
+  animation: 0.5s 1s forwards fadeIn;
+}
+
+.other-link {
+  color: $primary;
+  text-decoration: underline;
+  font-size: 14px;
+  &:hover {
+    color: $primary;
+    text-decoration: underline;
+  }
+}
+
+.q-figure {
+  width: 250px !important;
+  height: auto !important;
+}
+
+
+.copy-hover{
+  position: relative;
+  &.enabled{
+    .form-control{
+      pointer-events: initial !important;
+    }  
+  }
+  .form-control{
+    pointer-events: none;
+  }
+  .btn-copy{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+  }
+  .text-info{
+    cursor: pointer;
+  }
+  .text-muted.hidden{
+    display: none;
+  }
+}

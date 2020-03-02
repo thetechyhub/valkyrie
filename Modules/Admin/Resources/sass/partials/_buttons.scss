@@ -1,0 +1,166 @@
+.emcq-btn {
+  @include no-appearance;
+  @include fs-15;
+  letter-spacing: 0.025em;
+  border-radius: 16px;
+  border: 1px solid $primary;
+  color: $white;
+  background-color: $primary;
+  text-align: center;
+  display: inline-block;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  // padding: 2px 25px;
+  padding: 5px 10px;
+  line-height: 1.2;
+  &:hover {
+    background-color: transparent;
+    color: $primary;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &.type-2 {
+    background-color: transparent;
+    color: $primary;
+    &:hover {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+  &[disabled] {
+    background-color: $d-black-2;
+    pointer-events: none;
+    cursor: not-allowed;
+    border: 1px solid $d-black-2;
+    color: $white;
+  }
+}
+
+.emcq-btn-danger {
+  @include no-appearance;
+  @include fs-15;
+  letter-spacing: 0.025em;
+  border-radius: 16px;
+  border: 1px solid $danger;
+  color: $white;
+  background-color: $danger;
+  text-align: center;
+  display: inline-block;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  // padding: 2px 25px;
+  padding: 5px 10px;
+  line-height: 1.2;
+  &:hover {
+    background-color: transparent;
+    color: $danger;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &.type-2 {
+    background-color: transparent;
+    color: $danger;
+    &:hover {
+      background-color: $danger;
+      color: $white;
+    }
+  }
+  &[disabled] {
+    background-color: $d-black-2;
+    pointer-events: none;
+    cursor: not-allowed;
+    border: 1px solid $d-black-2;
+    color: $white;
+  }
+}
+
+.emcq-btn-wide {
+  @include no-appearance;
+  @include fs-15;
+  letter-spacing: 0.025em;
+  border-radius: 16px;
+  border: 1px solid $primary;
+  color: $white;
+  background-color: $primary;
+  text-align: center;
+  display: inline-block;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  // padding: 2px 25px;
+  padding: 5px 30px;
+  line-height: 1.2;
+  &:hover {
+    background-color: transparent;
+    color: $primary;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &[disabled] {
+    background-color: $d-black-2;
+    pointer-events: none;
+    cursor: not-allowed;
+    border: 1px solid $d-black-2;
+  }
+  &.type-2 {
+    background-color: transparent;
+    color: $primary;
+    &:hover {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+}
+
+.emcq-new-dropdown-wrapper {
+  @include min-md {
+    padding: 0 40px;
+  }
+  .emcq-new-dropdown {
+    .dropdown-toggle {
+      @include no-appearance;
+      border: 0;
+      background-color: transparent;
+      color: $d-black-2;
+      font-weight: bold;
+      white-space: normal;
+      line-height: 1.3;
+      text-align: left;
+      &:after {
+        vertical-align: middle;
+      }
+      &:focus {
+        outline: 0;
+      }
+    }
+    .dropdown-menu {
+      width: 100%;
+      position: absolute;
+      @include min-md {
+        width: auto;
+        left: auto;
+        right: 0;
+      }
+      .dropdown-item {
+        white-space: normal;
+        line-height: 1.4;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 16px;
+        // transition: color 0.3s ease, background-color 0.3s ease;
+        &:hover {
+          color: $white;
+          background-color: $primary;
+        }
+        &:focus {
+          outline: 0;
+        }
+        &.static {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+@mixin no-appearance {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $color;
+  }
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $color;
+    opacity: 1;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $color;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $color;
+  }
+  &::-ms-input-placeholder { /* Microsoft Edge */
+    color: $color;
+  }
+
+  &::placeholder { /* Most modern browsers support this now. */
+    color: $color;
+  }
+}
+
+@mixin no-autofill-bg($color) {
+  &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active {
+    transition: background-color 0s ease-in-out 50000s;
+    animation-name: autofill;
+    animation-fill-mode: both;
+    -webkit-text-fill-color: $color !important;
+  }
+}
+
+
+@mixin no-focus-hover($color) {
+  &:hover {
+    text-decoration: none;
+    color: $color;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+@mixin min-sm {
+  @media (min-width: 576px) { @content; }
+}
+@mixin min-md {
+  @media (min-width: 768px) { @content; }
+}
+@mixin min-lg {
+  @media (min-width: 992px) { @content; }
+}
+@mixin min-xl {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin min-xxl {
+  @media (min-width: 1500px) { @content; }
+}
+
+@mixin max-sm {
+  @media (max-width: 575px) { @content; }
+}
+@mixin max-md {
+  @media (max-width: 767px) { @content; }
+}
+@mixin max-lg {
+  @media (max-width: 991px) { @content; }
+}
+@mixin max-xl {
+  @media (max-width: 1199px) { @content; }
+}
+@mixin max-xxl {
+  @media (max-width: 1499px) { @content; }
+}
+
+@mixin triangle-bottom($color, $width, $height) {
+  $finalWidth: $width / 2;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: #{$height}px #{$finalWidth}px 0 #{$finalWidth}px;
+  border-color: $color transparent transparent transparent;
+  pointer-events: none;
+}
+
+.lp-25 {
+  letter-spacing: 0.025em;
+}
+@mixin fs-13 {
+  font-size: 13px;
+}
+@mixin fs-15 {
+  font-size: 15px;
+}
+@mixin fs-18 {
+  font-size: 18px;
+}
+@mixin fs-20 {
+  font-size: 20px;
+}
+@mixin fs-21 {
+  font-size: 21px;
+}
+@mixin fs-23 {
+  font-size: 23px;
+}
+@mixin fs-30 {
+  font-size: 28px;
+  @include min-sm {
+    font-size: 30px;
+  }
+}
+.fs-13 {
+  @include fs-15;
+}
+.fs-15 {
+  @include fs-15;
+}
+.fs-18 {
+  @include fs-18;
+}
+.fs-20 {
+  @include fs-20;
+}
+.fs-21 {
+  @include fs-21;
+}
+.fs-23 {
+  @include fs-23;
+}
+.fs-30 {
+  @include fs-30;
+}

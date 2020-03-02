@@ -1,0 +1,27 @@
+{
+  "name": "aimensasi/admin",
+  "description": "",
+  "authors": [
+    {
+      "name": "AIMEN.S.A.SASI",
+      "email": "aimensasi@icloud.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Modules\\Admin\\Providers\\AdminServiceProvider"
+      ],
+      "aliases": {
+
+      }
+    }
+  },
+  "autoload": {
+      "psr-4": {
+        "Modules\\Admin\\": ""
+      }
+  },
+  "require": {
+  }
+}

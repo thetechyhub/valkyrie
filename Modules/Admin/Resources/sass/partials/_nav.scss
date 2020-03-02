@@ -1,0 +1,133 @@
+.navbar {
+  background-color: $white;
+  padding: 0;
+  height: 70px;
+  border-bottom: 1px solid $d-gray-1;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 3;
+  top: 0;
+  @include min-md {
+    height: 85px;
+  }
+  .navbar-logo-wrapper {
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    @include min-md {
+      width: 200px;
+      border-right: 1px solid $d-gray-1;
+    }
+    @include min-lg {
+      width: 250px;
+    }
+    .navbar-brand {
+      padding: 0;
+      margin: 0;
+      img {
+        width: 90px;
+        @include min-md {
+          width: 130px;
+        }
+      }
+    }
+  }
+  .navbar-toggler {
+    &:focus {
+      outline: 0;
+    }
+    .icon-bar {
+      transform: rotate(0deg) translate(0px, 0px);
+      transition: ease all .2s;
+      display: block;
+      width: 35px;
+      border-radius: 1px;
+      border-top: 1px solid $d-black-2;
+    }
+    .icon-bar+.icon-bar {
+      margin-top: 7px;
+    }
+    .top-bar {
+      // transform: rotate(45deg);
+      // transform-origin: 10% 10%;
+    }
+    .middle-bar {
+      // width: 16px;
+      // transition: ease all .2s;
+    }
+    .bottom-bar {
+      width: 22px;
+      margin-left: 13px;
+      transform-origin: 10% 90%;
+    }
+    &:active > .middle-bar {
+      transition: ease all .2s;
+    }
+    &:not(.collapsed) {
+      .icon-bar {
+        transition: ease all .2s;
+      }
+      .top-bar {
+        transform: rotate(45deg) translate(11px, 4px);
+      }
+      .middle-bar {
+        opacity: 0;
+      }
+      .bottom-bar {
+        width: 35px;
+        margin-left: 0;
+        transform: rotate(-45deg) translate(4px, 10px);
+      }
+    }
+  }
+  .navbar-collapse {
+    @include max-md {
+      background: white;
+      position: relative;
+      z-index: 2;
+      .inner {
+        height: calc(100vh - 70px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .inner {
+      .navbar-nav {
+        @include max-md {
+          max-width: 320px;
+          padding: 0 30px;
+        }
+        .emcq-new-dropdown-wrapper {
+          @include max-md {
+            margin-bottom: 10px;
+          }
+        }
+        .nav-item {
+          // margin-bottom: 30px;
+          .nav-link {
+            color: $d-black-1;
+            i {
+              width: 30px;
+            }
+            &.active {
+              color: $d-gray-3;
+            }
+            &:hover {
+              text-decoration: none;
+              color: $d-gray-3;
+            }
+          }
+          &.mobile {
+            @include min-md {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
