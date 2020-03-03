@@ -7,15 +7,15 @@
 				<p class="tnc pt-0 text-center">Admin Portal</p>
 				<div class="auth-inputs">
 					<div class="auth-input-wrapper">
-						<input name="email" type="email" id="email_label" placeholder="Email Address...">
+						<input name="email" type="email" id="email_label" placeholder="Email Address..." v-model="data.email">
 					</div>
 
 					<div class="auth-input-wrapper">
-						<input name="password" type="password" id="password_label" placeholder="Password...">
+						<input name="password" type="password" id="password_label" placeholder="Password..." v-model="data.password">
 					</div>
 
 					<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary">LOGIN</button>
+						<button type="submit" class="btn btn-primary" @click="onLogin">LOGIN</button>
 					</div>
 				</div>
 			</form>
@@ -24,19 +24,33 @@
 </template>
 
 <script>
+	import { mapState, mapActions } from 'vuex';
 
 	export default {
 		props: [],
-		components: {
-
+		computed: {
+			...mapState({
+				session: state => state.session,
+			}),
 		},
 		data: function(){
 			return {
-
+				data: {},
 			}
 		},
-		mounted(){
-			
+		methods: {
+			...mapActions('session', {
+				login: 'login',
+			}),
+			onLogin: function(e){
+				e.preventDefault();
+				this.login( this.data )
+				.then((data) => {
+					this.$router.replace({ name: 'root' });
+				}).catch(() => {
+
+				});
+			}
 		}
 	}
 </script>

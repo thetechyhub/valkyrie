@@ -7,27 +7,27 @@ import { Login, Dashboard, E404 } from "../components";
 
 
 const routes = [
-    {
-        path: "/login",
-        name: "login",
-        meta: {
-            guest: true
-        },
-        component: Login
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+        guest: true
     },
-    {
-        path: "/dashboard",
-        alias: "/",
-        name: "root",
-        meta: {
-            auth: true
-        },
-        component: Dashboard
+    component: Login
+  },
+  {
+    path: "/dashboard",
+    alias: "/",
+    name: "root",
+    meta: {
+        auth: true
     },
-    {
-			path: "*",
-			component: E404
-    }
+    component: Dashboard
+  },
+  {
+    path: "*",
+    component: E404
+  }
 ];
 
 export default new VueRouter({
