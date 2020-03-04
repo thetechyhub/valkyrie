@@ -15,8 +15,6 @@ class IdentityServiceProvider extends ServiceProvider{
    */
   public function boot(){
     $this->registerConfig();
-    // $this->registerTranslations();
-    // $this->registerViews();
     $this->registerFactories();
     $this->loadMigrationsFrom(module_path('Identity', 'Database/Migrations'));
   }
@@ -27,7 +25,7 @@ class IdentityServiceProvider extends ServiceProvider{
    * @return void
    */
   public function register(){
-    $this->app->register(RouteServiceProvider::class);
+    // $this->app->register(RouteServiceProvider::class);
   }
 
   /**

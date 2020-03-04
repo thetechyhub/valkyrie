@@ -36,7 +36,7 @@ class Role extends Model{
 	 * @var array
 	 */
 	protected $casts = [
-		// attributes
+		"name" => "int"
 	];
 
 
@@ -56,5 +56,13 @@ class Role extends Model{
 	 */
 	public static function findByName($name){
 		return self::where('name', $name->value)->first();
+	}
+
+	/**
+	 * User Roles
+	 *  
+	 */
+	public function users(){
+		return $this->belongsToMany(User::class);
 	}
 }

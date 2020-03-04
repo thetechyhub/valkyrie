@@ -12,7 +12,6 @@ class IdentityDatabaseSeeder extends Seeder{
    * @return void
    */
   public function run(){
-    Model::unguard();
-    // $this->call("OthersTableSeeder");
+    $this->call(RolesTableSeeder::class);
   }
 }
