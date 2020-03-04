@@ -23,5 +23,6 @@
       }
   },
   "require": {
+    "tightenco/ziggy": "^0.8.1"
   }
 }

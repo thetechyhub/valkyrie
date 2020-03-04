@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/{any}', 'AdminController@index');
-Route::get('/', 'AdminController@index');
+Route::get('/', 'AdminController@index')->name('root');

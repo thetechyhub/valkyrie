@@ -42,6 +42,7 @@ Vue.component("main-layout", PrimaryLayout);
 Vue.component("secondary-layout", SecondaryLayout);
 Vue.component("error-layout", ErrorLayout);
 
+
 const app = new Vue({
 	el: "#app",
 	store: store,
