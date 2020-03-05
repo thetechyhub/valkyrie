@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Providers;
 
+use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
@@ -14,6 +15,11 @@ class IdentityServiceProvider extends ServiceProvider{
    * @return void
    */
   public function boot(){
+    Passport::routes();
+
+    Passport::tokensExpireIn(now()->addDays(1));
+    Passport::refreshTokensExpireIn(now()->addDays(30));
+
     $this->registerConfig();
     $this->registerFactories();
     $this->loadMigrationsFrom(module_path('Identity', 'src/Database/Migrations'));

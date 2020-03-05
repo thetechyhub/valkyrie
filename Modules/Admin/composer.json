@@ -18,9 +18,9 @@
     }
   },
   "autoload": {
-      "psr-4": {
-        "Modules\\Admin\\": ""
-      }
+    "psr-4": {
+      "Modules\\Admin\\": ""
+    }
   },
   "require": {
     "tightenco/ziggy": "^0.8.1"

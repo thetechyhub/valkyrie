@@ -49,20 +49,12 @@ class Role extends Model{
 		'name' => RoleOption::class,
 	];
 
-	/**
-	 * Find Role By Given Name 
-	 * 
-	 * @param RoleOption $name
-	 */
-	public static function findByName($name){
-		return self::where('name', $name->value)->first();
-	}
 
 	/**
 	 * User Roles
 	 *  
 	 */
 	public function users(){
-		return $this->belongsToMany(User::class);
+		return $this->belongsToMany(User::class, 'user_roles');
 	}
 }

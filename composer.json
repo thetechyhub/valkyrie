@@ -11,6 +11,7 @@
         "php": "^7.2",
         "bensampo/laravel-enum": "1.32",
         "fideloper/proxy": "^4.0",
+        "kitetail/zttp": "^0.6.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",

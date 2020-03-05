@@ -2,6 +2,10 @@
 
 namespace Modules\Identity;
 
+use Modules\Identity\Repositories\UserRepository;
+use Modules\Identity\Repositories\RoleRepository;
+use Modules\Identity\Repositories\PassportRepository;
+
 class Identity {
 
 	/**
@@ -61,6 +65,24 @@ class Identity {
 		return new static::$roleModel;
 	}
 
+		/**
+	 * Get Adminstrator Role Entity
+	 * 
+	 * @return \Modules\Identity\Entities\Role
+	 */
+	public static function getAdministratorRole(){
+		return RoleRepository::getAdministratorRole();
+	}
+
+	/**
+	 * Get Adminstrator Role ID
+	 * 
+	 * @return int
+	 */
+	public static function getAdministratorRoleId(){
+		return RoleRepository::getAdministratorRoleId();
+	}
+
 	/**
 	 * Get the verify token model class name.
 	 *
@@ -83,10 +105,23 @@ class Identity {
 	 * Create user from attributes.
 	 *
 	 * @param array $attributes
+	 * @param int $roleId
+	 * @param bool $mustVerifyEmail
 	 * @return \Modules\Identity\Entities\User
 	 */
-	public static function createUser($attribute){
-		//
+	public static function createUser($attribute, $roleId, $mustVerifyEmail = false){
+		return UserRepository::create($attribute, $roleId, $mustVerifyEmail);
+	}
+
+	/**
+	 * Find user by email and role id 
+	 * 
+	 * @param string $email
+	 * @param int $roleId
+	 * @return \Modules\Identity\Entities\User|null
+	 **/
+	public static function findUserByEmailAndRoleId($email, $roleId){
+		return UserRepository::findByEmailAndRoleId($email, $roleId);
 	}
 
 	/**
@@ -148,7 +183,7 @@ class Identity {
 	 * @return \Illuminate\Http\Response
 	 */
 	public static function createAccessToken($attribute){
-		//
+		return PassportRepository::createAccessToken($attribute);
 	}
 
 	/**
@@ -172,12 +207,12 @@ class Identity {
 	}
 
 	/**
-	 * Create refresh token from attributes.
+	 * Refresh the user access token.
 	 *
 	 * @param array $attributes
 	 * @return \Illuminate\Http\Response
 	 */
-	public static function createRefreshToken($attribute){
-		//
+	public static function refreshAccessToken($attribute){
+		return PassportRepository::refreshAccessToken($attribute);
 	}
 }

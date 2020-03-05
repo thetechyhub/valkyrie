@@ -13,4 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+Route::post('refresh', 'AuthController@refresh');
 
+
+Route::middleware(['auth:api'])->group(function () {
+
+
+
+
+	/**
+	 * Logout authenticated user
+	 * 
+	 */
+	Route::get('logout', 'AuthController@logout');
+
+
+	/**
+	 * Profile Route Resources
+	 * 
+	 */
+	Route::get('profile', 'AccountsController@profile');
+});

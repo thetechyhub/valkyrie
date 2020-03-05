@@ -2,9 +2,12 @@
 
 namespace Modules\Identity\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Model{
+class User extends Authenticatable{
+	use Notifiable, HasApiTokens;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -41,15 +44,7 @@ class User extends Model{
 	 *  
 	 */
 	public function roles(){
-		return $this->belongsToMany(Role::class);
-	}
-
-	/**
-	 * Check if use has a specific role
-	 *  
-	 */
-	public function getHasRoleAttribute($role){
-		return $this->roles()->where('name', $role)->first() != null;
+		return $this->belongsToMany(Role::class, 'user_roles');
 	}
 
 	/**
@@ -58,37 +53,5 @@ class User extends Model{
 	 **/
 	public function getIsVerifiedAttribute(){
 		return $this->email_verified_at || !$this->must_verify_email;
-	}
-
-	/**
-	 * Find the user instance for the given username.
-	 *
-	 * This used for passport token issuing process
-	 * 
-	 * @param  string  $username
-	 * @return \App\User
-	 */
-	public function findForPassport($username){
-		list($email, $role_id) = explode(' ', $username);
-
-		return $this->where('email', $email)
-			->whereHas('roles', function($query) use($role_id){
-				$query->where('id', $role_id);
-			})->first();
-	}
-
-
-	/**
-	 * Find user by email and role id 
-	 * 
-	 * @param string $email
-	 * @param int $role_id
-	 * @return User
-	 **/
-	public static function findByEmailAndRoleId($email, $role_id){
-		return self::where('email', $email)
-			->whereHas('roles', function ($query) use ($role_id) {
-				$query->where('id', $role_id);
-			})->first();
 	}
 }
