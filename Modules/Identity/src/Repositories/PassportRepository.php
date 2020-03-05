@@ -16,7 +16,7 @@ class PassportRepository {
 	 */
 	public static function createAccessToken($attribute){
 
-		self::revokeOtherAccessTokensFor($attribute['user_id'], $attribute['client_id']);
+		self::revokeAccessTokensFor($attribute['user_id'], $attribute['client_id']);
 
 		$response = Http::asFormParams()
 			->post(route('passport.token'), [
@@ -47,31 +47,12 @@ class PassportRepository {
 	 * @param int $userId
 	 * @return void
 	 */
-	public static function revokeOtherAccessTokensFor($userId, $clientId){
+	public static function revokeAccessTokensFor($userId, $clientId){
 		$token = Passport::token();
 		
 		$token = $token->where('client_id', $clientId)->where('user_id', $userId)->where('revoked', false);
 
 		$token->get()->map(function($token){
-			(new RefreshTokenRepository)->revokeRefreshTokensByAccessTokenId($token->id);
-		});
-
-		$token->update(['revoked' => true]);
-	}
-
-
-	/**
-	 * Revoke access all tokens for the specified user.
-	 *
-	 * @param int $userId
-	 * @return void
-	 */
-	public static function revokeAccessTokensFor($userId){
-		$token = Passport::token();
-
-		$token = $token->where('user_id', $userId)->where('revoked', false);
-
-		$token->get()->map(function ($token) {
 			(new RefreshTokenRepository)->revokeRefreshTokensByAccessTokenId($token->id);
 		});
 
@@ -104,6 +85,16 @@ class PassportRepository {
 		}
 
 		return $response->json();
+	}
+
+	/**
+	 * Revoke User access.
+	 *
+	 * @param array $attribute
+	 * @return void
+	 */
+	public static function revokeUserAccess($attribute){
+		return self::revokeAccessTokensFor($attribute['user_id'], $attribute['client_id']);
 	}
 
 }

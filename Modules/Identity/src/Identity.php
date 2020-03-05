@@ -215,4 +215,15 @@ class Identity {
 	public static function refreshAccessToken($attribute){
 		return PassportRepository::refreshAccessToken($attribute);
 	}
+
+
+	/**
+	 * Revoke User access.
+	 *
+	 * @param array $attribute
+	 * @return void
+	 */
+	public static function revokeUserAccess($attribute){
+		return PassportRepository::revokeUserAccess($attribute);
+	}
 }

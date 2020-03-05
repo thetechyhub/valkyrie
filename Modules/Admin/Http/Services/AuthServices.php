@@ -110,6 +110,13 @@ class AuthServices{
 	 * @return \Illuminate\Http\Response
 	 **/
 	public static function logout(Request $request){
+		$user = user();
+		$data = [
+			'user_id' => $user->id,
+			'client_id' => $request->header('client-id'),
+		];
+
+		Identity::revokeUserAccess($data);
 		return success();
 	}
 }
