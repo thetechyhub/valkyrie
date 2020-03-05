@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Identity\Repositories;
+namespace Modules\Identity;
 
 class Identity {
 

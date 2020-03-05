@@ -16,7 +16,7 @@ class IdentityServiceProvider extends ServiceProvider{
   public function boot(){
     $this->registerConfig();
     $this->registerFactories();
-    $this->loadMigrationsFrom(module_path('Identity', 'Database/Migrations'));
+    $this->loadMigrationsFrom(module_path('Identity', 'src/Database/Migrations'));
   }
 
   /**
@@ -25,7 +25,7 @@ class IdentityServiceProvider extends ServiceProvider{
    * @return void
    */
   public function register(){
-    // $this->app->register(RouteServiceProvider::class);
+
   }
 
   /**
@@ -35,30 +35,13 @@ class IdentityServiceProvider extends ServiceProvider{
    */
   protected function registerConfig(){
     $this->publishes([
-      module_path('Identity', 'Config/config.php') => config_path('identity.php'),
+      module_path('Identity', 'src/Config/config.php') => config_path('identity.php'),
     ], 'config');
     $this->mergeConfigFrom(
-      module_path('Identity', 'Config/config.php'), 'identity'
+      module_path('Identity', 'src/Config/config.php'), 'identity'
     );
   }
 
-  /**
-   * Register views.
-   *
-   * @return void
-   */
-  public function registerViews(){
-    $viewPath = resource_path('views/modules/identity');
-    $sourcePath = module_path('Identity', 'Resources/views');
-
-    $this->publishes([
-      $sourcePath => $viewPath
-    ],'views');
-
-    $this->loadViewsFrom(array_merge(array_map(function ($path) {
-      return $path . '/modules/identity';
-    }, Config::get('view.paths')), [$sourcePath]), 'identity');
-  }
 
   /**
    * Register translations.
@@ -71,7 +54,7 @@ class IdentityServiceProvider extends ServiceProvider{
     if (is_dir($langPath)) {
       $this->loadTranslationsFrom($langPath, 'identity');
     } else {
-      $this->loadTranslationsFrom(module_path('Identity', 'Resources/lang'), 'identity');
+      $this->loadTranslationsFrom(module_path('Identity', 'src/Resources/lang'), 'identity');
     }
   }
 
@@ -82,7 +65,7 @@ class IdentityServiceProvider extends ServiceProvider{
    */
   public function registerFactories(){
     if (! app()->environment('production') && $this->app->runningInConsole()) {
-      app(Factory::class)->load(module_path('Identity', 'Database/factories'));
+      app(Factory::class)->load(module_path('Identity', 'src/Database/factories'));
     }
   }
 
