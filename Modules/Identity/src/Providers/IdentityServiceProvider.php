@@ -3,7 +3,6 @@
 namespace Modules\Identity\Providers;
 
 use Laravel\Passport\Passport;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 

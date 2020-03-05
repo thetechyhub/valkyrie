@@ -1,4 +1,5 @@
 {
     "Admin": true,
-    "Identity": true
+    "Identity": true,
+    "Core": true
 }

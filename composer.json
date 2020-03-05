@@ -39,7 +39,8 @@
         "psr-4": {
             "App\\": "app/",
             "Modules\\": "Modules/",
-            "Modules\\Identity\\": "Modules/Identity/src"
+            "Modules\\Identity\\": "Modules/Identity/src",
+            "Modules\\Core\\": "Modules/Core/src"
         },
         "classmap": [
             "database/seeds",
