@@ -31,10 +31,10 @@ class CoreServiceProvider extends ServiceProvider{
    */
   protected function registerConfig(){
     $this->publishes([
-      module_path('Core', 'Config/config.php') => config_path('core.php'),
+      module_path('Core', 'src/Config/config.php') => config_path('core.php'),
     ], 'config');
     $this->mergeConfigFrom(
-      module_path('Core', 'Config/config.php'), 'core'
+      module_path('Core', 'src/Config/config.php'), 'core'
     );
   }
 

@@ -3,6 +3,8 @@
 namespace Modules\Core\Http\Services;
 
 use Modules\Identity\Identity;
+use Modules\Core\Helpers\Response;
+use Modules\Core\Helpers\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +27,7 @@ class AuthServices{
 		]);
 
 		if ($validator->fails()) {
-			return validation_error(['message' => $validator->errors()->first()]);
+			return Response::validationError(['message' => $validator->errors()->first()]);
 		}
 
 		$data = $validator->validated();
@@ -56,7 +58,7 @@ class AuthServices{
 		]);
 
 		if ($validator->fails()) {
-			return validation_error(['message' => $validator->errors()->first()]);
+			return Response::validationError(['message' => $validator->errors()->first()]);
 		}
 
 		$data = $validator->validated();
@@ -65,13 +67,13 @@ class AuthServices{
 		$user = Identity::findUserByEmailAndRoleId($data['email'], $administratorRoleId);
 
 		if(!$user){
-			return validation_error([
+			return Response::validationError([
 				'message' => 'Email or password is incorrect',
 			]);
 		}
 
 		if(!Hash::check($data['password'], $user->password)){
-			return validation_error([
+			return Response::validationError([
 				'message' => 'Email or password is incorrect',
 			]);			
 		}
@@ -110,7 +112,7 @@ class AuthServices{
 	 * @return \Illuminate\Http\Response
 	 **/
 	public static function logout(Request $request){
-		$user = user();
+		$user = Common::currentUser();
 		$data = [
 			'user_id' => $user->id,
 			'client_id' => $request->header('client-id'),
