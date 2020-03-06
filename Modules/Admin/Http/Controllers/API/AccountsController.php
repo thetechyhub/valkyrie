@@ -4,6 +4,7 @@ namespace Modules\Admin\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Core\Http\Services\AccountServices;
 
 class AccountsController extends Controller{
 
@@ -13,6 +14,6 @@ class AccountsController extends Controller{
 	 * @return \Illuminate\Http\Response
 	 */
 	public function profile(){
-		// return ProfileServices::profile();
+		return AccountServices::profile();
 	}
 }
