@@ -5,10 +5,13 @@ require('laravel-mix-merge-manifest');
 
 var publicPath = "../../public";
 
+require("dotenv").config({ path: "../../.env" });
+
 mix.alias({
   "@": "/Resources/scripts/",
   "~": "/Resources/scss/",
-  "component": "/Resources/scripts/components"
+  "@component": "/Resources/scripts/components",
+  "@pages": "/Resources/scripts/pages"
 });
 
 mix.setPublicPath(publicPath).mergeManifest();

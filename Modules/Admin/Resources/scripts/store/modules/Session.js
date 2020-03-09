@@ -1,12 +1,23 @@
 export default {
 	namespaced: true,
 	state: {
-		accessToken: sessionStorage.getItem("access_token") || null,
-		refreshToken: sessionStorage.getItem("refresh_token") || null,
-		expiresIn: sessionStorage.getItem("expire_in") || null
+		accessToken: null,
+		refreshToken: null,
+		expiresIn: null
 	},
-	getters: {  },
+	getters: { 
+		check(state){
+			return !!state.accessToken;
+		}
+	},
 	mutations: {
+		init(state){
+			state.accessToken = sessionStorage.getItem("access_token")
+			state.refreshToken = sessionStorage.getItem("refresh_token");
+			state.expiresIn = sessionStorage.getItem("expire_in");
+
+			dispatch('validate');
+		},
 		setSession(state, { accessToken, refreshToken, expiresIn }){ 
 			state.accessToken = accessToken;
 			state.refreshToken = refreshToken;
@@ -28,12 +39,27 @@ export default {
 	},
 	actions: {
 		login(context, { email, password }) {
-			return new Promise((resolve, reject) => {
-				resolve();
+			let url = route('admin.login').url();
+			axios.post(url, { email, password })
+			.then(({ data }) => {
+				return Promise.resolve(data);
+			}).catch((response) => {
+				return Promise.reject(response);
 			});
 		},
 		logout(context){
-			context.commit('unsetSession');
+
+		},
+		validate(context){
+			if(context.getters.check) return Promise.resolve(false);
+
+
+			// get access token and call api for current user details
+			// if 401 then request new access token
+			// if got 401 again then logout the user and ask him to login again.
+			// add a key to the session marking the last time you validated the user
+			// this will stop the app from making requests to the server everytime since the token can last for more than 1 hour
+			// update this session on each valid request.
 		}
 	}
 };

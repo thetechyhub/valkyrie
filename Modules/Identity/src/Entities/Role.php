@@ -2,15 +2,13 @@
 
 namespace Modules\Identity\Entities;
 
-use BenSampo\Enum\Traits\CastsEnums;
-use Modules\Identity\Enums\RoleOption;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property \Modules\Identity\Enums\RoleOption|null $name
- */
 class Role extends Model{
-	use CastsEnums;
+
+	const SuperAdministrator = "SuperAdmin";
+	const Administrator = "Admin";
+	const Client = "Client";
 
 	/**
 	 * The attributes that are mass assignable.
@@ -36,17 +34,7 @@ class Role extends Model{
 	 * @var array
 	 */
 	protected $casts = [
-		"name" => "int"
-	];
-
-
-	/**
-	 * The attributes that should be cast to an enum type.
-	 *
-	 * @var array
-	 */
-	protected $enumCasts = [
-		'name' => RoleOption::class,
+		// attributes
 	];
 
 

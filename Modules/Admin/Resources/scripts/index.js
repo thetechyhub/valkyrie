@@ -1,4 +1,4 @@
-window._ = require("lodash");
+import _ from 'lodash';
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -20,7 +20,8 @@ try {
 
 window.axios = require("axios");
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-
+window.axios.defaults.headers.common["client-id"] = process.env.MIX_ADMIN_CLIENT_ID;
+window.axios.defaults.headers.common["client-secret"] = process.env.MIX_ADMIN_CLIENT_SECRET;
 
 /**
  * 
@@ -30,24 +31,21 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
  */
 
 import Vue from "vue";
-import App from './App.vue';
-import store from "./store";
-import routes from "./routes";
+import app from '@/app';
+import store from "@/store";
+import router from "@/routes";
 
-import PrimaryLayout from "component/Layout/PrimaryLayout";
-import SecondaryLayout from "component/Layout/SecondaryLayout";
-import ErrorLayout from "component/Layout/ErrorLayout";
+import PrimaryLayout from "@pages/Layout/PrimaryLayout";
+import SecondaryLayout from "@pages/Layout/SecondaryLayout";
+import ErrorLayout from "@pages/Layout/ErrorLayout";
 
 Vue.component("main-layout", PrimaryLayout);
 Vue.component("secondary-layout", SecondaryLayout);
 Vue.component("error-layout", ErrorLayout);
 
-
-const app = new Vue({
+new Vue({
 	el: "#app",
 	store: store,
-	router: routes,
-	render: h => h(App)
+	router: router,
+	render: h => h(app)
 });
-
- 

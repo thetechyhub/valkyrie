@@ -27,14 +27,6 @@ class PassportRepository {
 				'password' => $attribute['password'],
 				'scope' => '*',
 			]);
-
-
-		if (!$response->isOk()) {
-			return unauthorized_request([
-				'message' => 'Email or password is incorrect',
-				"description" => $response->json(),
-			]);
-		}
 		
 		return $response->json();
 	}
@@ -75,14 +67,6 @@ class PassportRepository {
 				'refresh_token' => $attribute['refresh_token'],
 				'scope' => '*',
 			]);
-
-
-		if (!$response->isOk()) {
-			return unauthorized_request([
-				'message' => 'Invalid Request.',
-				"description" => $response->json(),
-			]);
-		}
 
 		return $response->json();
 	}

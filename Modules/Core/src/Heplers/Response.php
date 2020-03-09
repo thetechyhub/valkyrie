@@ -41,7 +41,7 @@ class Response {
 			"message" => "Something does not look right with this request, make sure check your data."
 		];
 
-		return respond($message, $status_code);
+		return self::create($message, $status_code);
 	}
 
 
@@ -52,7 +52,7 @@ class Response {
 			"message" => "Something went wrong on our side, please try again later or contact support."
 		];
 
-		return respond($message, $status_code);
+		return self::create($message, $status_code);
 	}
 
 

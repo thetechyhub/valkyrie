@@ -3,7 +3,6 @@
 namespace Modules\Identity\Repositories;
 
 use Modules\Identity\Identity;
-use Modules\Identity\Enums\RoleOption;
 
 class RoleRepository {
 
@@ -27,8 +26,8 @@ class RoleRepository {
 	 */
 	public static function getAdministratorRole(){
 		$role = Identity::role();
-
-		return $role->firstOrCreate([ 'name' => RoleOption::Administrator ]);
+		
+		return $role->firstOrCreate([ 'name' => $role::Administrator ]);
 	}
 
 	/**
@@ -38,5 +37,26 @@ class RoleRepository {
 	 */
 	public static function getAdministratorRoleId(){
 		return self::getAdministratorRole()->id;
+	}
+
+
+	/**
+	 * Get Super Adminstrator Role Entity
+	 * 
+	 * @return \Modules\Identity\Entities\Role
+	 */
+	public static function getSuperAdministratorRole(){
+		$role = Identity::role();
+		
+		return $role->firstOrCreate([ 'name' => $role::SuperAdministrator ]);
+	}
+
+	/**
+	 * Get Super Adminstrator Role ID
+	 * 
+	 * @return int
+	 */
+	public static function getSuperAdministratorRoleId(){
+		return self::getSuperAdministratorRole()->id;
 	}
 }

@@ -24,7 +24,6 @@
   },
    "require": {
      "laravel/passport": "^8.4",
-     "bensampo/laravel-enum": "1.32",
      "kitetail/zttp": "^0.6.0"
   }
 }

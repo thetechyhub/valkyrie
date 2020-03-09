@@ -20,8 +20,8 @@ class UserRepository {
 		if($password){
 			$attributes['password'] = Hash::make($password);
 		}
-
-		$user = Identity::user()->forceFill($attributes);
+		$user = Identity::user();
+		$user = $user::create($attributes);
 		$user->must_verify_email = $mustVerifyEmail;
 		$user->email_verified_at = $mustVerifyEmail ? now() : null;
 		$user->save();

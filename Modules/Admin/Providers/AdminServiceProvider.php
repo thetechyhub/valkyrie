@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -15,6 +16,7 @@ class AdminServiceProvider extends ServiceProvider{
   public function boot(){
     $this->registerTranslations();
     $this->registerConfig();
+    $this->registerCommands();
     $this->registerViews();
     $this->registerFactories();
     $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
@@ -58,7 +60,7 @@ class AdminServiceProvider extends ServiceProvider{
 
     $this->loadViewsFrom(array_merge(array_map(function ($path) {
       return $path . '/modules/admin';
-    }, \Config::get('view.paths')), [$sourcePath]), 'admin');
+    }, Config::get('view.paths')), [$sourcePath]), 'admin');
   }
 
   /**
@@ -85,6 +87,17 @@ class AdminServiceProvider extends ServiceProvider{
     if (! app()->environment('production') && $this->app->runningInConsole()) {
       app(Factory::class)->load(module_path('Admin', 'Database/factories'));
     }
+  }
+
+  /**
+   * Register Console commands 
+   * 
+   * @return void
+   */
+  public function registerCommands(){
+    $this->commands([
+      \Modules\Admin\Console\RegisterAdmin::class,
+    ]);
   }
 
   /**
