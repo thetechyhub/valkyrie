@@ -14,7 +14,9 @@ class IdentityServiceProvider extends ServiceProvider{
    * @return void
    */
   public function boot(){
-    Passport::routes();
+    Passport::routes(null, [
+      "domain" => $this->domain(),
+    ]);
 
     Passport::tokensExpireIn(now()->addDays(1));
     Passport::refreshTokensExpireIn(now()->addDays(30));
@@ -22,6 +24,19 @@ class IdentityServiceProvider extends ServiceProvider{
     $this->registerConfig();
     $this->registerFactories();
     $this->loadMigrationsFrom(module_path('Identity', 'src/Database/Migrations'));
+  }
+
+  /**
+   * Set the domain of the application based on the env variable
+   *
+   * @return void
+   */
+  private function domain(string $subdomain = ''){
+    if (strlen($subdomain) > 0) {
+      $subdomain = "{$subdomain}.";
+    }
+
+    return config('app.domain_prefix') . $subdomain . config('app.domain');
   }
 
   /**

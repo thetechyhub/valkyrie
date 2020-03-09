@@ -3,6 +3,7 @@
 namespace Modules\Identity\Repositories;
 
 use Zttp\Zttp as Http;
+use Modules\Core\Helpers\Response;
 use Laravel\Passport\Passport;
 use Laravel\Passport\RefreshTokenRepository;
 
@@ -19,6 +20,7 @@ class PassportRepository {
 		self::revokeAccessTokensFor($attribute['user_id'], $attribute['client_id']);
 
 		$response = Http::asFormParams()
+			->withoutVerifying()
 			->post(route('passport.token'), [
 				'grant_type' => 'password',
 				'client_id' => $attribute['client_id'],
@@ -27,7 +29,13 @@ class PassportRepository {
 				'password' => $attribute['password'],
 				'scope' => '*',
 			]);
-		
+
+		if (!$response->isOk()) {
+			return Response::unauthorized([
+				'message' => 'Email or password is incorrect',
+				"description" => $response->json(),
+			]);
+		}
 		return $response->json();
 	}
 
@@ -59,7 +67,9 @@ class PassportRepository {
 	 * @return \Illuminate\Http\Response
 	 */
 	public static function refreshAccessToken($attribute){
+
 		$response = Http::asFormParams()
+			->withoutVerifying()
 			->post(route('passport.token'), [
 				'grant_type' => 'refresh_token',
 				'client_id' => $attribute['client_id'],
@@ -68,6 +78,14 @@ class PassportRepository {
 				'scope' => '*',
 			]);
 
+
+		if (!$response->isOk()) {
+			return Response::unauthorized([
+				'message' => 'Email or password is incorrect',
+				"description" => $response->json(),
+			]);
+		}
+		
 		return $response->json();
 	}
 
