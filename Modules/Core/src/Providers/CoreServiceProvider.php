@@ -13,6 +13,7 @@ class CoreServiceProvider extends ServiceProvider{
    */
   public function boot(){
     $this->registerConfig();
+    $this->registerCommands();
   }
 
   /**
@@ -22,6 +23,18 @@ class CoreServiceProvider extends ServiceProvider{
    */
   public function register(){
 
+  }
+
+  /**
+   * Register Console commands 
+   * 
+   * @return void
+   */
+  public function registerCommands()
+  {
+    $this->commands([
+      \Modules\Core\Console\RunTests::class,
+    ]);
   }
 
   /**
