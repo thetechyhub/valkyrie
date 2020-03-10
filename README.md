@@ -7,72 +7,97 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Who's Valkyrie
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+So you stop asking about who's Valkyrie or why. Valkyrie is character in one of my favirot show, [The Last Ship](https://g.co/kgs/xzxJ6Q).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## About The Project
 
-## Learning Laravel
+This project was created inorder to provide an illustration of how modular architecture can be implemnted in Laravel. Modular architecture provides an approach to manage the complexity of large scale projects by breaking problems down into small components while maintaining low coupling between the different modules of the projct. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Generally every project is compaination of set of different features or components that communicate and interact with each other to provide a solution for a business problem. Following the modular architecture, a number of these tightly coupled feature can be grouped together to form one module. This module can then be shared and reused with other projects inorder to reduce the time spent to deliver project to client or market.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<br/>
+<br/>
+<p align="center">
+    <img src="https://drive.google.com/uc?export=view&id=1FS9hRGGSCZg71Z6weGBEwD_JBW4EUFF-" width="700">
+</p>
+<br/>
+<br/>
 
-## Laravel Sponsors
+## Inspiration
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+This project was mainly inspired by the approach Laravel has when developing composer packages that can be installed and easily integrated by any developer without having to write the code yourself (reinventing the wheel).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+## Why the change
 
-## Contributing
+Laravel comes with a pretty neat structure that is suited for almost every small to medium project. However after completing a number of considerably large and complex projects such as [Zcova](https://www.zcova.com) and [e-MCQ](https://www.myemcq.com). The were serveral issues that made these projects very hard to maintain and very risky to introduce new features complex features without introducing bugs to the already built features.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This project aims to prevent these issues from happing again in future projects. 
 
-## Code of Conduct
+## Learning Resources
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- [Meduim Article On Modular Architecture](https://medium.com/on-software-architecture/on-modular-architectures-53ec61f88ff4)
+- [Laravel Modules Package](https://github.com/nWidart/laravel-modules)
 
-## Security Vulnerabilities
+    Laravel Modules Package provides the tooling necessery to get setup and create new modules easily with having to create the new files by yourself.
+    
+- [Bagisto Source Code](https://github.com/bagisto/bagisto)
+   
+   Bagisto is an open source Ecommerce Application that has a real life example of how modular architecture can be implemented in complex projects. This github package can show you how features can be broken down into smaller modules and how they can interact with each other.
+   
+   
+## Getting Started
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+1. Clone the repository and cd to the project folder.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+git clone git@github.com:thetechyhub/valkyrie.git && cd valkyrie
+```
+
+2. Run composer install
+
+```
+composer install
+```
+
+3. Update the modules composer
+
+This command will update all modules composer packages.
+
+
+```
+php artisan modules:update
+```
+
+
+4. Run migration and seed commands
+
+```
+php artisan migrate
+
+php artisan module:migrate
+
+php artisan db:seed
+
+php artisan module:seed
+```
+
+5. cd to the Admin module and then install and compile the npm packages
+
+```
+cd Modules/Admin
+
+npm install && npm run dev
+```
+
+6. Setup your domain
+
+This may vary for windows and macs so just setup your localhost domain with Valet or XAMMP. Take a note that the Admin module is set to be served over sub-domain for example `admin.valkyrie.ts`
+
+
+## Issues Reporting
+
+If you discover any issues within Valkyrie, Please open an [issue](https://github.com/thetechyhub/valkyrie/issues) highliting the problem.
