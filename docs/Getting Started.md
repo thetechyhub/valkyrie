@@ -11,8 +11,8 @@
 Delete some of the default Laravel folders and files, this is just keep things neat.
 
 * Remove the default routes inside the routes folder, don't delete the folder just the code.
-* Remove the default `Auth` controllers.
-* Remove the default `models`, `migrations`, `seed` and `factories`.
+* Remove the default `Auth` controllers folder.
+* Remove the default `models`, `migrations`, `seed` and `factories` files.
 * Remove all resource folders except for the `lang` folder.
 * Run composer dumpautoload to make sure there are no issues.
 
