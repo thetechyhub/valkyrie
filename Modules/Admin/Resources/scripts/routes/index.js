@@ -58,12 +58,12 @@ router.beforeEach((toRoute, fromRoute, next) => {
 
   function redirectToRoot() {
     // Pass the original route to the root page
-    next({ name: 'root', query: { redirectFrom: toRoute.fullPath } })
+    next({ name: 'root'})
   }
 
   function redirectToLogin() {
     // Pass the original route to the login page
-    next({ name: "login", query: { redirectFrom: toRoute.fullPath } });
+    next({ name: "login"});
   }
 
 });

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Utility from '@/utils/Utility';
 
 import modules from './modules';
 
@@ -13,3 +14,5 @@ const store = new Vuex.Store({
 });
 
 export default store;
+
+Utility.dispatchModulesActions("init");

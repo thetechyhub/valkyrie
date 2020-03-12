@@ -1,5 +1,5 @@
 import Modules from "@/store/modules";
-import store from "@/store/store";
+import store from "@/store";
 
 export default class Utility {
 
@@ -56,6 +56,7 @@ export default class Utility {
 	}
 
 	static dispatchModulesActions(actionName, { modules = Modules, modulePrefix = '', flags = {} } = {}){ 
+		console.log("Dispatch All", modules);
 		for (const moduleName in modules) {
 			const moduleDefinition = modules[moduleName]
 			// If the action is defined on the module...

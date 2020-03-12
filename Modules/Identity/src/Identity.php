@@ -109,8 +109,8 @@ class Identity {
 	 * @param bool $mustVerifyEmail
 	 * @return \Modules\Identity\Entities\User
 	 */
-	public static function createUser($attribute, $roleId, $mustVerifyEmail = false){
-		return UserRepository::create($attribute, $roleId, $mustVerifyEmail);
+	public static function createUser($attributes, $roleId, $mustVerifyEmail = false){
+		return UserRepository::create($attributes, $roleId, $mustVerifyEmail);
 	}
 
 	/**

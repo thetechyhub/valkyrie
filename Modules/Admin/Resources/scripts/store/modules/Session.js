@@ -13,11 +13,9 @@ export default {
 	},
 	mutations: {
 		init(state){
-			state.accessToken = sessionStorage.getItem("access_token")
+			state.accessToken = sessionStorage.getItem("access_token");
 			state.refreshToken = sessionStorage.getItem("refresh_token");
 			state.expiresIn = sessionStorage.getItem("expire_in");
-
-			dispatch('validate');
 		},
 		setSession(state, payload){ 
 			state.accessToken = payload.access_token;
@@ -42,6 +40,9 @@ export default {
 		}
 	},
 	actions: {
+		init(context){
+			context.commit("init");
+		},
 		login(context, { email, password }) {
 			let url = route('admin.login').url();
 			return axios.post(url, { email, password })
@@ -101,6 +102,8 @@ export default {
 			// this will stop the app from making requests to the server everytime since the token can last for more than 1 hour
 			// update this session on each valid request.
 			if(!getters.check) return Promise.resolve(false);
+
+			return Promise.resolve(true);
 			let retry = 3;
 			let current = 0;
 			let status = false;
