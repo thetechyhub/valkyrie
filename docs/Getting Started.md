@@ -159,8 +159,8 @@ app/
 bootstrap/
 vendor/
 Modules/
-  ├── src/
-    ├── Core/
+  ├── Core/
+    ├── src/
       ├── Config/
       ├── Database/
       ├── Entities/
