@@ -185,6 +185,7 @@ has some predefined function calls inside the `boot` method. which help register
 Since we changed our module default structure, we will need to update the `CoreServiceProvider.php` to match our modification.
 
 * Update the `boot` method:
+
 Before:
 ```
  /**
@@ -201,6 +202,7 @@ Before:
   }
 ```
 We will remove the **registerTranslations**, **registerViews**, and update the path to the **loadMigrationsFrom** folder.
+
 After:
 ```
  /**
@@ -270,8 +272,7 @@ Inside the `registerFactories` function, change the code to the below one:
 
 ### Updating composer 
 
-This step is only necessary because we changed the default structure of the module, so you don't repeat this step for other modules.
-
+This step is only necessary for all internal modules, since we changed the default structure of the module.
 Inside the main composer.json in the root of your project add the following line.
 
 ```
