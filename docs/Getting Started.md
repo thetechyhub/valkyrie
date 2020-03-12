@@ -53,7 +53,7 @@ Next you need to add the following code to your `composer.json` and run `compose
 ```
 
 This line of code will tell Laravel where to look to find your modules. After running `composer dumpautoload`, 
-open up the `config` file, which can be found in the in `config/modules.php` and update the following lines.
+open up the `config` file, which can be found in the `config/modules.php` and update the following lines.
 
 ```
 'generator' => [
