@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model{
 
-	const SuperAdministrator = "SuperAdmin";
-	const Administrator = "Admin";
-	const Client = "Client";
-
 	/**
 	 * The attributes that are mass assignable.
 	 *

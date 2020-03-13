@@ -14,9 +14,14 @@ class RolesTableSeeder extends Seeder{
   public function run(){
     Role::truncate();
 
-    
-    Role::create(['name' => Role::SuperAdministrator]);
-    Role::create(['name' => Role::Administrator]);
-    Role::create(['name' => Role::Client]);
+    $roles = config('app.roles');
+
+    if(!$roles || empty($roles)){
+      $roles = ['Admin'];
+    }
+
+    foreach($roles as $role){
+      Role::create(['name' => $role]);
+    } 
   }
 }

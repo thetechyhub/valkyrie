@@ -2,6 +2,11 @@
 
 namespace Modules\Identity;
 
+use BadMethodCallException;
+use Illuminate\Support\Facades\Auth;
+
+
+use Modules\Core\Helpers\Common;
 use Modules\Identity\Repositories\UserRepository;
 use Modules\Identity\Repositories\RoleRepository;
 use Modules\Identity\Repositories\PassportRepository;
@@ -28,6 +33,20 @@ class Identity {
 	 * @var string
 	 */
 	public static $verifyTokenModel = 'Modules\Identity\Entities\VerifyToken';
+
+
+
+	public static function __callStatic($method, $arguments){
+		$methodName = Common::parseMethodName($method);
+
+		if($methodName->contains('Role')){
+			return forward_static_call([RoleRepository::class, $method], $arguments);
+		} elseif ($methodName->contains('User')) {
+			return forward_static_call([UserRepository::class, $method], $arguments);
+		}else{
+			throw new BadMethodCallException("Undefined Function method $method");
+		}
+	}
 
 	/**
 	 * Get the user model class name.
@@ -65,22 +84,13 @@ class Identity {
 		return new static::$roleModel;
 	}
 
-		/**
-	 * Get Adminstrator Role Entity
-	 * 
-	 * @return \Modules\Identity\Entities\Role
-	 */
-	public static function getAdministratorRole(){
-		return RoleRepository::getAdministratorRole();
-	}
-
 	/**
-	 * Get Adminstrator Role ID
-	 * 
-	 * @return int
+	 * Get currently Authenticated User.
+	 *
+	 * @return \Modules\Identity\Entities\User
 	 */
-	public static function getAdministratorRoleId(){
-		return RoleRepository::getAdministratorRoleId();
+	public static function currentUser($guard = null){
+		return Auth::guard($guard)->user();
 	}
 
 	/**

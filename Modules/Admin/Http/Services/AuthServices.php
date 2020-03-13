@@ -4,7 +4,6 @@ namespace Modules\Core\Http\Services;
 
 use Modules\Identity\Identity;
 use Modules\Core\Helpers\Response;
-use Modules\Core\Helpers\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -112,13 +111,13 @@ class AuthServices{
 	 * @return \Illuminate\Http\Response
 	 **/
 	public static function logout(Request $request){
-		$user = Common::currentUser();
+		$user = Identity::currentUser();
 		$data = [
 			'user_id' => $user->id,
 			'client_id' => $request->header('client-id'),
 		];
 
 		Identity::revokeUserAccess($data);
-		return success();
+		return Response::success();
 	}
 }
