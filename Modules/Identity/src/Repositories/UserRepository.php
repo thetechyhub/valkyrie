@@ -15,7 +15,7 @@ class UserRepository {
 	 * @return \Modules\Identity\Entities\User
 	 */
 	public static function create($attributes, $roleId, $mustVerifyEmail){
-		$password = $attributes['password'];
+		$password = @$attributes['password'];
 
 		if($password){
 			$attributes['password'] = Hash::make($password);
@@ -23,7 +23,6 @@ class UserRepository {
 		$user = Identity::user();
 		$user = $user::create($attributes);
 		$user->must_verify_email = $mustVerifyEmail;
-		$user->email_verified_at = $mustVerifyEmail ? now() : null;
 		$user->save();
 
 		$user->roles()->attach($roleId);

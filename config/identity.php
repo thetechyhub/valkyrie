@@ -22,6 +22,8 @@ return [
   |
   */
   'roles' => [
-
+    'SuperAdmin',
+    'Admin',
+    'Client'
   ],
 ];

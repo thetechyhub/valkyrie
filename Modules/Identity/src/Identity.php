@@ -10,6 +10,7 @@ use Modules\Core\Helpers\Common;
 use Modules\Identity\Repositories\UserRepository;
 use Modules\Identity\Repositories\RoleRepository;
 use Modules\Identity\Repositories\PassportRepository;
+use Modules\Identity\Repositories\VerifyTokenRepository;
 
 class Identity {
 
@@ -138,10 +139,10 @@ class Identity {
 	 * Verify account for the specified user
 	 *
 	 * @param array $attributes
-	 * @return \Modules\Identity\Entities\User
+	 * @return void
 	 */
 	public static function verifyAccount($token){
-		//
+		return VerifyTokenRepository::verifyAccount($token);
 	}
 
 	/**
@@ -151,17 +152,18 @@ class Identity {
 	 * @return \Modules\Identity\Entities\User
 	 */
 	public static function resetPassword($token, $password){
-		//
+		return VerifyTokenRepository::resetPassword($token, $password);
 	}
 
 	/**
 	 * Create verify token from attributes.
 	 *
 	 * @param array $attributes
+	 * @param int $userId
 	 * @return \Modules\Identity\Entities\VerifyToken
 	 */
-	public static function createVerifyToken($attribute){
-		//
+	public static function createVerifyToken($attribute, $userId){
+		return VerifyTokenRepository::createVerifyToken($attribute, $userId);
 	}
 
 	/**
@@ -170,8 +172,8 @@ class Identity {
 	 * @param int $userId
 	 * @return void
 	 */
-	public static function revokeVerifyTokenFor($userId){
-		//
+	public static function revokeVerifyTokensFor($userId){
+		return VerifyTokenRepository::revokeVerifyTokensFor($userId);
 	}
 
 
@@ -182,7 +184,7 @@ class Identity {
 	 * @return void
 	 */
 	public static function revokeVerifyToken($token){
-		//
+		return VerifyTokenRepository::revokeVerifyToken($token);
 	}
 
 
@@ -194,26 +196,6 @@ class Identity {
 	 */
 	public static function createAccessToken($attribute){
 		return PassportRepository::createAccessToken($attribute);
-	}
-
-	/**
-	 * Revoke access token for the specified user.
-	 *
-	 * @param int $userId
-	 * @return void
-	 */
-	public static function revokeAccessTokenFor($userId){
-		//
-	}
-
-	/**
-	 * Revoke access all tokens for the specified user.
-	 *
-	 * @param int $userId
-	 * @return void
-	 */
-	public static function revokeAccessTokensFor($userId){
-		//
 	}
 
 	/**

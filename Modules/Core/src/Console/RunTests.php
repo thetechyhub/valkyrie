@@ -64,6 +64,7 @@ class RunTests extends Command{
       'Modules/' . $name,
       $group != null ? '--group=' . $group : ''
     ]);
+
     $process->setTty(true);
     $process->run();
 

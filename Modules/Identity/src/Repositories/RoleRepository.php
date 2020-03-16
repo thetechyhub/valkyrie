@@ -67,13 +67,14 @@ class RoleRepository {
 	 * @return \Modules\Identity\Entities\Role
 	 */
 	public static function getRoleFor($attribute, $arguments){
-		$role = Identity::role();
-		
-		$role =  $role->where('name',  $attribute)->first();
+		$supportedRoles = config('identity.roles');
 
-		if(!$role){
+		if(empty($supportedRoles) || !in_array($attribute, $supportedRoles)){
 			throw new UnSopportedRoleException();
 		}
+
+		$role = Identity::role();
+		$role =  $role->firstOrCreate(['name' => $attribute]);
 
 		return $role;
 	}
