@@ -17,9 +17,11 @@ class UserRepository {
 	public static function create($attributes, $roleId, $mustVerifyEmail){
 		$password = @$attributes['password'];
 
+
 		if($password){
 			$attributes['password'] = Hash::make($password);
 		}
+		
 		$user = Identity::user();
 		$user = $user::create($attributes);
 		$user->must_verify_email = $mustVerifyEmail;

@@ -4,11 +4,12 @@
 
 use Faker\Generator as Faker;
 use Modules\Identity\Entities\User;
+use Illuminate\Support\Facades\Hash;
 
 $factory->define(User::class, function (Faker $faker) {
   return [
     'email' => $faker->safeEmail,
-    'password' => 'secret',
+    'password' => Hash::make('secret'),
     'must_verify_email' => true,
     'email_verified_at' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = 'now'),
     'profile' => [

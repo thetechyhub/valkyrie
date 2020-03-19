@@ -15,18 +15,18 @@ class PassportRepository {
 	 * @param array $attributes
 	 * @return \Illuminate\Http\Response
 	 */
-	public static function createAccessToken($attribute){
+	public static function createAccessToken($attributes){
 
-		self::revokeAccessTokensFor($attribute['user_id'], $attribute['client_id']);
-
+		self::revokeAccessTokensFor($attributes['user_id'], $attributes['client_id']);
+		
 		$response = Http::asFormParams()
 			->withoutVerifying()
 			->post(route('passport.token'), [
 				'grant_type' => 'password',
-				'client_id' => $attribute['client_id'],
-				'client_secret' => $attribute['client_secret'],
-				'username' => $attribute['email'],
-				'password' => $attribute['password'],
+				'client_id' => $attributes['client_id'],
+				'client_secret' => $attributes['client_secret'],
+				'username' => $attributes['email'],
+				'password' => $attributes['password'],
 				'scope' => '*',
 			]);
 
@@ -66,15 +66,15 @@ class PassportRepository {
 	 * @param array $attributes
 	 * @return \Illuminate\Http\Response
 	 */
-	public static function refreshAccessToken($attribute){
+	public static function refreshAccessToken($attributes){
 
 		$response = Http::asFormParams()
 			->withoutVerifying()
 			->post(route('passport.token'), [
 				'grant_type' => 'refresh_token',
-				'client_id' => $attribute['client_id'],
-				'client_secret' => $attribute['client_secret'],
-				'refresh_token' => $attribute['refresh_token'],
+				'client_id' => $attributes['client_id'],
+				'client_secret' => $attributes['client_secret'],
+				'refresh_token' => $attributes['refresh_token'],
 				'scope' => '*',
 			]);
 
@@ -92,11 +92,11 @@ class PassportRepository {
 	/**
 	 * Revoke User access.
 	 *
-	 * @param array $attribute
+	 * @param array $attributes
 	 * @return void
 	 */
-	public static function revokeUserAccess($attribute){
-		return self::revokeAccessTokensFor($attribute['user_id'], $attribute['client_id']);
+	public static function revokeUserAccess($attributes){
+		return self::revokeAccessTokensFor($attributes['user_id'], $attributes['client_id']);
 	}
 
 }

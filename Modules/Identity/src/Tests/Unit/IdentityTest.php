@@ -6,9 +6,11 @@ use Modules\Identity\Identity;
 use Modules\Identity\Exceptions\UnSopportedRoleException;
 use Modules\Identity\Exceptions\InvalidTokenException;
 
-
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\ClientRepository;
+use Laravel\Passport\Client;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -72,7 +74,20 @@ class IdentityTest extends TestCase{
 
     return $usersFactory->random();
   }
-  
+
+  /**
+   * Create passport client setup
+   * 
+   * @return Client
+   **/
+  public function createPassportClient(): Client{
+    $clientRepository = new ClientRepository();
+    $client = $clientRepository->create(null, "Password Grant Clinet", 'localhost', false, true);
+
+    return $client;
+  }
+
+
   /**
    * @test
    * 
@@ -337,5 +352,30 @@ class IdentityTest extends TestCase{
 
     $this->expectException(InvalidTokenException::class);
     Identity::verifyAccount($verifyToken->token);
+  }
+
+  /**
+   * @unsolved
+   * 
+   * @group identity
+   * @group identity_passport
+   * @return void
+   */
+  public function it_can_issue_an_access_token(){
+    $client = $this->createPassportClient();
+    $this->supportedRoles(function($roleId) use ($client){
+      $user = $this->createUser(null, $roleId);
+
+      $data = [
+        'user_id' => $user->id,
+        "client_id" => $client->id,
+        "client_secret" => $client->secret,
+        "email" => $user->email,
+        "password" => 'secret',
+      ];
+
+      $response = Identity::createAccessToken($data);
+      $this->assertArrayHasKey('access_token', $response);
+    });
   }
 }
