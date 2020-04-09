@@ -14,10 +14,6 @@ class IdentityServiceProvider extends ServiceProvider{
    * @return void
    */
   public function boot(){
-    Passport::routes(null, [
-      "domain" => $this->domain(),
-    ]);
-
     Passport::tokensExpireIn(now()->addDays(1));
     Passport::refreshTokensExpireIn(now()->addDays(30));
 
