@@ -49,9 +49,9 @@ export default {
 			return axios.post(url, { email, password })
 			.then(({ data }) => {
 				context.commit('setSession', data);
-				return new Promoise.resolve();
+				return Promise.resolve();
 			}).catch((response) => {
-				return new Promoise.reject(response);
+				return Promise.reject(response);
 			});
 		},
 		logout(context){
@@ -63,62 +63,42 @@ export default {
 			return axios.post(url, { refresh_token: context.state.refreshToken })
 			.then(({ data }) => {
 				context.commit('setSession', data);
-				return true;
+				return Promise.resolve();
 			}).catch((response) => {
-				return false;
+				return Promise.reject(response);
 			});
 		},
 		profile({ state, dispatch }){
-			let accessToken = state.refreshToken;
+			let accessToken = state.accessToken;
 			let url = route('admin.profile').url();
 
 
 			return axios.get(url, {
 				headers: {
-					'Authorization': `Basic ${accessToken}`
+					'Authorization': `Bearer ${accessToken}`
 				}
 			}).then(({ data }) => {
-				return Promise.resolve(true);
+				context.commit("setCurrentUser", data);
+				return Promise.resolve();
 			}).catch(({ response }) => {
-				let status = response.status;
-				if(status == 401){
-					return dispatch('refresh').then((state) => {
-						if(!state){
-							context.commit("unsetSession");
-							return Promise.resolve(false);
-						}
-
-						return Promise.resolve(true);
-					});
-				}
-
-				return Promise.resolve(false);
+				return Promise.reject(response);
 			});
 		},
 		validate({ state, dispatch, getters }){
-			// get access token and call api for current user details
-			// if 401 then request new access token
-			// if got 401 again then logout the user and ask him to login again.
-			// add a key to the session marking the last time you validated the user
-			// this will stop the app from making requests to the server everytime since the token can last for more than 1 hour
-			// update this session on each valid request.
 			if(!getters.check) return Promise.resolve(false);
 
-			return Promise.resolve(true);
-			let retry = 3;
-			let current = 0;
-			let status = false;
-			while(current <= retry){
-				if (!getters.check) return Promise.resolve(false);
-				dispatch('profile')
-					.then((state) => {
-						status = state;
-						current = retry;		
-					});
-				current++;
-			}
-
-			return Promise.resolve(status);
+			return dispatch('profile')
+				.then(() => {
+					return Promise.resolve(true);
+				}).catch(() => {
+					return dispatch("refresh")
+            .then(() => {
+							dispatch("profile").then(() => {}).catch(() => {});
+							return Promise.resolve(true);
+						}).catch(() => {
+							return Promise.resolve(false);
+						});
+				});
 		}
 	}
 };

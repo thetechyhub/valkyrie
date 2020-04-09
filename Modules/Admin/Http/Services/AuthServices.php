@@ -50,9 +50,9 @@ class AuthServices{
 		$data['client_id'] = $request->header('client-id');
 		$data['client_secret'] = $request->header('client-secret');
 
-		$response = Identity::createAccessToken($data);
+		$result = Identity::createAccessToken($data);
 
-		return $response;
+		return Response::create($result);
 	}
 
 

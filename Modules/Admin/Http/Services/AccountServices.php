@@ -2,14 +2,14 @@
 
 namespace Modules\Core\Http\Services;
 
-use Modules\Core\Helpers\Common;
+use Modules\Identity\Identity;
 use Modules\Core\Helpers\Response;
 
 class AccountServices extends TransformerService{
 
 
 	public static function profile(){ 
-		$user = Common::currentUser();
+		$user = Identity::currentUser();
 
 		return Response::create(self::transform($user));
 	}

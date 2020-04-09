@@ -42,14 +42,9 @@ router.beforeEach((toRoute, fromRoute, next) => {
   if (!isRouteProtected && !isGuestOnlyRoute) return next();
 
   if(isRouteProtected){
-    if (store.getters['session/check']) {
-      return store.dispatch('session/validate').then((status) => {
-        status ? next() : redirectToLogin()
-      })
-    }
-
-    redirectToLogin();
-
+    return store.dispatch("session/validate").then(status => {
+      status ? next() : redirectToLogin();
+    });
   }else if(isGuestOnlyRoute){
     if (store.getters['session/check']) return redirectToRoot();
 

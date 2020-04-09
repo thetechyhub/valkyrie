@@ -1,43 +1,74 @@
-.emcq-sidebar {
-  width: 200px;
-  border-right: 1px solid $d-gray-1;
-  background-color: $white;
-  display: none;
+.sidebar {
+  width: 180px;
+  border: 1px solid rgba(0, 0, 0, 0.57);
+  background-color: $d-black-1;
+  display: flex;
   justify-content: center;
+  height: 98vh;
+  position: fixed;
+  left: 15px;
+  top: 10px;
+  border-radius: 15px;
+  overflow-y: scroll;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .57),
+  0 1px 2px 0 rgba(0, 0, 0, .57);
+  
+  @include max-sm{
+    width: 70px;
+  }
 
-  height: 100%;
   @include min-md {
     display: flex;
   }
   @include min-lg {
-    width: 250px;
+    width: 200px;
   }
   .inner {
-    height: calc(100% - 138px);
+    height: calc(100% - 1.9rem);
     overflow-y: auto;
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
   }
   .sidebar-links {
-    padding-top: 40px;
+    padding-top: 0px;
     padding-left: 0;
     margin-bottom: 0; 
     list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     .sidebar-nav-item {
-      margin-bottom: 30px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      &.only-sm {
+        display: none;
+        @include max-sm {
+          display: block;
+        }
+      }
+      &.hidden-sm {
+        @include max-sm {
+          display: none;
+        }
+      }
+
       .sidebar-nav-link {
-        color: $d-black-1;
+        color: $white;
+        font-size: 14px;
+        font-weight: 400;
         i {
           width: 30px;
         }
-        &.active {
-          color: $d-gray-3;
-        }
-        &:hover {
-          text-decoration: none;
-          color: $d-gray-3;
-        }
+      }
+      &.active {
+        background-color: #e2e2e238;
+      }
+
+      &:hover {
+        text-decoration: none;
+        background-color: #e2e2e238;
       }
     }
   }

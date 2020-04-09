@@ -56,7 +56,6 @@ export default class Utility {
 	}
 
 	static dispatchModulesActions(actionName, { modules = Modules, modulePrefix = '', flags = {} } = {}){ 
-		console.log("Dispatch All", modules);
 		for (const moduleName in modules) {
 			const moduleDefinition = modules[moduleName]
 			// If the action is defined on the module...

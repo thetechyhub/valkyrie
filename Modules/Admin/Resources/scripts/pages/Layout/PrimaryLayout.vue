@@ -1,12 +1,16 @@
 <template>
 	<div>
-		<navbar />
-		<main class="logged-in">
-			<section class="main-left">
-				<sidebar />
+		<main>
+			<section class="nav-top">
+				<!-- <navbar /> -->
 			</section>
-			<section class="main-right">
-				<slot name="main-content" />
+			<section class="main">
+				<section class="main-left">
+					<sidebar />
+				</section>
+				<section class="main-right">
+					<!-- <slot name="main-content" /> -->
+				</section>
 			</section>
 		</main>
 	</div>
