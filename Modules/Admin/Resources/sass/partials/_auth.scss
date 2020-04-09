@@ -1,192 +1,308 @@
-.auth-wrapper {
-  @include min-md {
-    height: 100vh;
+.strange-wrapper{
+  .main-section{
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
-  .auth-row {
+  .image-view{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #1a202c;
+    background-image: url("/images/admin/strange-cover.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .group-container{
     display: flex;
-    flex-wrap: wrap;
-    @include min-md {
-      height: 100%;
-    }
-    .auth-col {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      // align-items: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    .form-container{
       width: 100%;
-      @include min-md {
-        padding-top: 20vh;
-        padding-bottom: 60px;
-        @include make-col(6);
+      @media (min-width: 1024px) {
+        width: 33.333333%;
       }
-      // @include min-xxl {
-      //   padding-top: 30vh;
-      // }
-      &.left-col {
-        background-color: $primary;
-        h2, p, .cta {
-          color: $white;
-        }
-        h2 {
-          font-weight: 600;
-          position: relative;
-          margin-bottom: 20px;
-          padding-bottom: 10px;
-          @include max-sm {
-            padding-top: 10px;
-          }
-          &:before {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 50px;
-            border-bottom: 2px solid $white;
-          }
-        }
-        p {
-          @include max-xxl {
-            font-size: 16px;
-          }
-          @include max-sm {
-            font-size: 14px;
-          }
-        }
-        .cta {
-          display: inline-block;
-          border-radius: 16px;
-          border: 1px solid $white;
-          padding: 5px 10px;
-          margin-top: 10px;
-          transition: color 0.3s ease, background-color 0.3s ease;
-          &:hover {
-            text-decoration: none;
-            background-color: $white;
-            color: $primary;
-          }
-        }
+      background-color: #e2e8f0;
+      position: relative;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1),
+      0 4px 6px -2px rgba(0, 0, 0, .05);
+      border-radius: 0.5rem;
+
+      .title{
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-weight: 400;
+        padding-top: 2rem;
+        padding-bottom: 1.5rem;
       }
-      &.right-col {
-        h1 {
-          color: $black-2;
-          position: relative;
-          margin-bottom: 20px;
-          padding-bottom: 10px;
-          &:before {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            border-bottom: 2px solid $red-1;
+      .alert.alert-danger{
+        font-size: 0.9rem;
+        padding: 0.55rem 1rem;
+        color: #ffffff;
+        background-color: #ff385c;
+        border-color: #ff385c;
+      }
+      .form-group{
+        label{
+          color: #000;
+          font-weight: 300;
+          font-size: 0.9rem;
+        }
+        .form-control{
+          border-color: transparent;
+          height: calc(1.5em + 0.75rem + 10px);
+          border-radius: 0.35rem;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1),
+          0 1px 2px 0 rgba(0, 0, 0, .06);
+
+          &::-webkit-input-placeholder {
+              /* Chrome/Opera/Safari */
+              color: #d2d2d2;
+              font-size: 0.8rem;
+          }
+
+          &::-moz-placeholder {
+              /* Firefox 19+ */
+              color: #d2d2d2;
+              font-size: 0.8rem;
+          }
+
+          &:-ms-input-placeholder {
+              /* IE 10+ */
+              color: #d2d2d2;
+              font-size: 0.8rem;
+          }
+
+          &:-moz-placeholder {
+              /* Firefox 18- */
+              color: #d2d2d2;
+              font-size: 0.8rem;
+          }
+          &:focus{
+            border-color: transparent;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1),
+            0 1px 2px 0 rgba(0, 0, 0, .06);
           }
         }
       }
-      .auth-content {
-        padding: 0 30px;
-        &.not-form {
-          @include min-md {
-            padding: 0;
-            max-width: 75%;
-          }
-          @include min-lg {
-            max-width: 60%;
-          }
-          @include min-xl {
-            max-width: 50%;
-          }
-        }
-        &.form {
-          min-width: 300px;
-        }
-        form {
-          .auth-inputs {
-            padding-top: 20px;
-            .auth-input-wrapper {
-              margin-bottom: 20px;
-              input:not([type=checkbox]) {
-                @include no-appearance;
-                @include no-autofill-bg($gray-2);
-                @include placeholder-color($gray-2);
-                border: 0;
-                border-bottom: 1px solid $gray-2;
-                color: $gray-2;
-                width: 100%;
-                background-color: transparent;
-                &:focus {
-                  outline: 0;
-                }
-              }
-              .auth-checkbox {
-                display: block;
-                position: relative;
-                margin-bottom: 0px;
-                cursor: pointer;
-                min-width: 20px;
-                min-height: 20px;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                line-height: 1.3;
-                padding-left: 35px;
-                a {
-                  color: $primary;
-                  text-decoration: underline;
-                  font-weight: bold;
-                }
-                &:hover {
-                  input ~ .checkmark {
-                    background-color: #ccc;
-                  }
-                }
-                input {
-                  position: absolute;
-                  opacity: 0;
-                  cursor: pointer;
-                  height: 0;
-                  width: 0 !important;
-                  &:checked {
-                    &~ .checkmark {
-                      background-color: $primary;
-                      &:after {
-                        display: block;
-                      }
-                    }
-                  }
-                }
-                .checkmark {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  height: 20px;
-                  width: 20px;
-                  border: 1px solid $primary;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  &:after {
-                    display: none;
-                    font-style: normal;
-                    font-variant: normal;
-                    text-rendering: auto;
-                    -webkit-font-smoothing: antialiased;
-                    font-family: "Font Awesome 5 Pro";
-                    font-weight: 400;
-                    content: "\f00c";
-                    text-align: center;
-                    font-size: 12px;
-                    color: $white;
-                  }
-                }
-              }
-            }
-          }
-        }
+      .btn-submit{
+        background: #1a202c;
+        color: #ffffff;
+        width: 100%;
+        height: 50px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
       }
     }
+  }
+
+  .footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #1a202c;
+    padding-bottom: 1.5rem;
   }
 }
+
+
+// .wrapper {
+//   background-image: url("/images/admin/strange-cover.png");
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+
+//   @include min-md {
+//     height: 100vh;
+//   }
+//   .row {
+//     display: flex;
+//     flex-wrap: wrap;
+//     @include min-md {
+//       height: 100%;
+//     }
+//     .col {
+//       position: relative;
+//       display: flex;
+//       justify-content: center;
+//       // align-items: center;
+//       padding-top: 80px;
+//       padding-bottom: 80px;
+//       width: 100%;
+//       @include min-md {
+//         padding-top: 20vh;
+//         padding-bottom: 60px;
+//         @include make-col(6);
+//       }
+//       // @include min-xxl {
+//       //   padding-top: 30vh;
+//       // }
+//       &.left-col {
+//         background-color: $primary;
+//         h2, p, .cta {
+//           color: $white;
+//         }
+//         h2 {
+//           font-weight: 600;
+//           position: relative;
+//           margin-bottom: 20px;
+//           padding-bottom: 10px;
+//           @include max-sm {
+//             padding-top: 10px;
+//           }
+//           &:before {
+//             content: "";
+//             position: absolute;
+//             top: 100%;
+//             left: 0;
+//             width: 50px;
+//             border-bottom: 2px solid $white;
+//           }
+//         }
+//         p {
+//           @include max-xxl {
+//             font-size: 16px;
+//           }
+//           @include max-sm {
+//             font-size: 14px;
+//           }
+//         }
+//         .cta {
+//           display: inline-block;
+//           border-radius: 16px;
+//           border: 1px solid $white;
+//           padding: 5px 10px;
+//           margin-top: 10px;
+//           transition: color 0.3s ease, background-color 0.3s ease;
+//           &:hover {
+//             text-decoration: none;
+//             background-color: $white;
+//             color: $primary;
+//           }
+//         }
+//       }
+//       &.right-col {
+//         h1 {
+//           color: $black-2;
+//           position: relative;
+//           margin-bottom: 20px;
+//           padding-bottom: 10px;
+//           &:before {
+//             content: "";
+//             position: absolute;
+//             top: 100%;
+//             left: 50%;
+//             transform: translateX(-50%);
+//             width: 50px;
+//             border-bottom: 2px solid $red-1;
+//           }
+//         }
+//       }
+//       .content {
+//         padding: 0 30px;
+//         &.not-form {
+//           @include min-md {
+//             padding: 0;
+//             max-width: 75%;
+//           }
+//           @include min-lg {
+//             max-width: 60%;
+//           }
+//           @include min-xl {
+//             max-width: 50%;
+//           }
+//         }
+//         &.form {
+//           min-width: 300px;
+//         }
+//         form {
+//           .inputs {
+//             padding-top: 20px;
+//             .input-wrapper {
+//               margin-bottom: 20px;
+//               input:not([type=checkbox]) {
+//                 @include no-appearance;
+//                 @include no-autofill-bg($gray-2);
+//                 @include placeholder-color($gray-2);
+//                 border: 0;
+//                 border-bottom: 1px solid $gray-2;
+//                 color: $gray-2;
+//                 width: 100%;
+//                 background-color: transparent;
+//                 &:focus {
+//                   outline: 0;
+//                 }
+//               }
+//               .checkbox {
+//                 display: block;
+//                 position: relative;
+//                 margin-bottom: 0px;
+//                 cursor: pointer;
+//                 min-width: 20px;
+//                 min-height: 20px;
+//                 -webkit-user-select: none;
+//                 -moz-user-select: none;
+//                 -ms-user-select: none;
+//                 user-select: none;
+//                 line-height: 1.3;
+//                 padding-left: 35px;
+//                 a {
+//                   color: $primary;
+//                   text-decoration: underline;
+//                   font-weight: bold;
+//                 }
+//                 &:hover {
+//                   input ~ .checkmark {
+//                     background-color: #ccc;
+//                   }
+//                 }
+//                 input {
+//                   position: absolute;
+//                   opacity: 0;
+//                   cursor: pointer;
+//                   height: 0;
+//                   width: 0 !important;
+//                   &:checked {
+//                     &~ .checkmark {
+//                       background-color: $primary;
+//                       &:after {
+//                         display: block;
+//                       }
+//                     }
+//                   }
+//                 }
+//                 .checkmark {
+//                   position: absolute;
+//                   top: 0;
+//                   left: 0;
+//                   height: 20px;
+//                   width: 20px;
+//                   border: 1px solid $primary;
+//                   display: flex;
+//                   justify-content: center;
+//                   align-items: center;
+//                   &:after {
+//                     display: none;
+//                     font-style: normal;
+//                     font-variant: normal;
+//                     text-rendering: auto;
+//                     -webkit-font-smoothing: antialiased;
+//                     font-family: "Font Awesome 5 Pro";
+//                     font-weight: 400;
+//                     content: "\f00c";
+//                     text-align: center;
+//                     font-size: 12px;
+//                     color: $white;
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

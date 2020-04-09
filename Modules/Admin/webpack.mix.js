@@ -16,8 +16,10 @@ mix.alias({
 
 mix.setPublicPath(publicPath).mergeManifest();
 
+
 mix.js(__dirname + '/Resources/scripts/index.js', 'js/admin.js')
-  .sass( __dirname + '/Resources/sass/app.scss', 'css/admin.css');
+  .sass( __dirname + '/Resources/sass/app.scss', 'css/admin.css')
+  .copyDirectory(__dirname + "/Resources/images", publicPath + "/images/admin");
 
 
 

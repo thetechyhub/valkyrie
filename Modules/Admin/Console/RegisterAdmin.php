@@ -68,10 +68,10 @@ class RegisterAdmin extends Command{
     }
 
 
-    $roleId = RoleRepository::getAdministratorRoleId();
+    $roleId = RoleRepository::getRoleIdForAdmin();
 
     if($this->option('super')){
-      $roleId = RoleRepository::getSuperAdministratorRoleId();
+      $roleId = RoleRepository::getRoleIdForSuperAdmin();
     }
 
     $user = UserRepository::create($data, $roleId, false);

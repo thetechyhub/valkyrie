@@ -6,12 +6,11 @@ use Modules\Identity\Identity;
 use Modules\Identity\Exceptions\UnSopportedRoleException;
 use Modules\Identity\Exceptions\InvalidTokenException;
 
-use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Passport\ClientRepository;
 use Laravel\Passport\Client;
-use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Passport\ClientRepository;
+
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class IdentityTest extends TestCase{
@@ -82,7 +81,7 @@ class IdentityTest extends TestCase{
    **/
   public function createPassportClient(): Client{
     $clientRepository = new ClientRepository();
-    $client = $clientRepository->create(null, "Password Grant Clinet", 'localhost', false, true);
+    $client = $clientRepository->create(null, "Password Grant Client", 'localhost', false, true);
 
     return $client;
   }
@@ -180,7 +179,7 @@ class IdentityTest extends TestCase{
    * @group identity
    * @return void
    */
-  public function it_can_get_create_user(){
+  public function it_can_create_user(){
     $this->supportedRoles(function($roleId){
       $userFactory = factory(Identity::userModel())->make()->makeVisible('password');
       $user = Identity::createUser($userFactory->toArray(), $roleId, $userFactory['must_verify_email']);
@@ -216,7 +215,7 @@ class IdentityTest extends TestCase{
     $this->supportedRoles(function ($roleId) {
       $user = $this->createUser('must_verify', $roleId);
 
-      $verifyToken = factory(Identity::verifyTokenModel())->create(['user_id' => $user->id]);
+      $verifyToken = factory(Identity::verifyTokenModel())->state('email')->create(['user_id' => $user->id]);
 
       $this->assertEquals($user->must_verify_email, true);
       $this->assertEquals($user->email_verified_at, null);
@@ -286,7 +285,7 @@ class IdentityTest extends TestCase{
   public function it_should_create_email_verify_token_for_user(){
     $this->supportedRoles(function ($roleId) {
       $user = $this->createUser('must_verify', $roleId);
-      $attribute = factory(Identity::verifyTokenModel())->make()->toArray();
+      $attribute = factory(Identity::verifyTokenModel())->state('email')->make()->toArray();
 
       $verifyToken = Identity::createVerifyToken($attribute, $user->id);
 
@@ -355,7 +354,7 @@ class IdentityTest extends TestCase{
   }
 
   /**
-   * @unsolved
+   * @test
    * 
    * @group identity
    * @group identity_passport
@@ -372,10 +371,53 @@ class IdentityTest extends TestCase{
         "client_secret" => $client->secret,
         "email" => $user->email,
         "password" => 'secret',
+      ];      
+      
+      $response = Identity::createAccessToken($data);
+
+      $this->assertArrayHasKey('access_token', $response);
+      $this->assertArrayHasKey('refresh_token', $response);
+      $this->assertArrayHasKey('token_type', $response);
+      $this->assertArrayHasKey('expires_in', $response);
+    });
+  }
+
+
+  /**
+   * @test
+   * 
+   * @group identity
+   * @group identity_passport
+   * @return void
+   */
+  public function it_can_issue_a_refresh_token(){
+    $client = $this->createPassportClient();
+    $this->supportedRoles(function($roleId) use ($client){
+      $user = $this->createUser(null, $roleId);
+
+      $data = [
+        'user_id' => $user->id,
+        "client_id" => $client->id,
+        "client_secret" => $client->secret,
+        "email" => $user->email,
+        "password" => 'secret',
       ];
 
       $response = Identity::createAccessToken($data);
+      $refresh_token = $response['refresh_token'];
+
+      $data = [
+        "client_id" => $client->id,
+        "client_secret" => $client->secret,
+        "refresh_token" => $refresh_token,
+      ];      
+      
+      $response = Identity::refreshAccessToken($data);
+
       $this->assertArrayHasKey('access_token', $response);
+      $this->assertArrayHasKey('refresh_token', $response);
+      $this->assertArrayHasKey('token_type', $response);
+      $this->assertArrayHasKey('expires_in', $response);
     });
   }
 }

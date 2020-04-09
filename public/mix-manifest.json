@@ -3,5 +3,7 @@
     "/css/admin.css": "/css/admin.css",
     "/js/mainapp.js": "/js/mainapp.js",
     "/auth.js": "/auth.js",
-    "/dashboard.js": "/dashboard.js"
+    "/dashboard.js": "/dashboard.js",
+    "/images/strange-cover.png": "/images/strange-cover.png",
+    "/images/admin/strange-cover.png": "/images/admin/strange-cover.png"
 }

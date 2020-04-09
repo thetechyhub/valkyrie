@@ -13,37 +13,6 @@ class AuthServices{
 
 
 	/**
-	 * Register new user based on given scope
-	 * 
-	 * 
-	 * @param Request $request
-	 * @return \Illuminate\Http\Response
-	 **/
-	public static function register(Request $request){
-		$validator = Validator::make($request->all(), [
-			'email' => 'required|unique:users',
-			'password' => 'required|min:6|confirmed',
-		]);
-
-		if ($validator->fails()) {
-			return Response::validationError(['message' => $validator->errors()->first()]);
-		}
-
-		$data = $validator->validated();
-		$administratorRoleId = Identity::getAdministratorRoleId();
-		
-		$user = Identity::createUser($data, $administratorRoleId);
-
-		$data['user_id'] = $user->id;
-		$data['client_id'] = $request->header('client-id');
-		$data['client_secret'] = $request->header('client-secret');
-
-		$response = Identity::createAccessToken($data);
-
-		return $response;
-	}
-
-	/**
 	 * Login the user
 	 * 
 	 * 
@@ -61,9 +30,9 @@ class AuthServices{
 		}
 
 		$data = $validator->validated();
-		$administratorRoleId = Identity::getAdministratorRoleId();
+		$roleId = Identity::getRoleIdForAdmin();
 
-		$user = Identity::findUserByEmailAndRoleId($data['email'], $administratorRoleId);
+		$user = Identity::findUserByEmailAndRoleId($data['email'], $roleId);
 
 		if(!$user){
 			return Response::validationError([

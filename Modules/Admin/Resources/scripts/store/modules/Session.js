@@ -45,12 +45,13 @@ export default {
 		},
 		login(context, { email, password }) {
 			let url = route('admin.login').url();
+
 			return axios.post(url, { email, password })
 			.then(({ data }) => {
 				context.commit('setSession', data);
-				return data;
+				return new Promoise.resolve();
 			}).catch((response) => {
-				return response;
+				return new Promoise.reject(response);
 			});
 		},
 		logout(context){

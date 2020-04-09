@@ -3,6 +3,7 @@
 namespace Modules\Identity\Middleware;
 
 use Closure;
+use Modules\Core\Helpers\Response;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,7 @@ class OriginCheck{
     ]);
 
     if ($validator->fails()) {
-        return forbidden_request();
+      return Response::forbidden();
     }
 
     return $next($request);

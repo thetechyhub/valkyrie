@@ -1,18 +1,18 @@
 <template>
-	<div class="auth-wrapper">
-		<div class="auth-row">
-			<div class="auth-col left-col order-2 order-md-1">
-				<div class="auth-content not-form">
-					<h2 class="fs-30 lp-25">Welcome to Valkyrie</h2>
+	<main class="strange-wrapper">
+		<section class="main-section">
+			<div class="image-view"></div> 
+			<slot name="main-content" />
+			<footer class="footer">
+				<div class="container mx-auto px-4">
+					<hr class="mb-6 border-b-1 border-gray-700">
+					<div class="d-flex ml-3">
+						<p>Copyright © The Techy Hub Sdn Bhd {{ new Date().getFullYear() }}</p>
+					</div>
 				</div>
-			</div>
-			<div class="auth-col right-col order-1 order-md-2">
-				<div class="auth-content form">
-					<slot name="main-content" />	
-				</div>
-			</div>
-		</div>
-	</div>
+			</footer>
+		</section>
+	</main>
 </template>
 
 <script>

@@ -12,11 +12,15 @@ $factory->define(VerifyToken::class, function (Faker $faker) {
       return factory(User::class)->create()->id;
     },
     'token' => VerifyToken::code(),
-    'used_for' => VerifyToken::EMAIL,
+    'used_for' => $faker->randomElement([VerifyToken::EMAIL, VerifyToken::PASSWORD]),
     'expire_in' => now()->addHours(24),
   ];
 });
 
+
+$factory->state(VerifyToken::class, 'email', [
+  'used_for' => VerifyToken::EMAIL,
+]);
 
 $factory->state(VerifyToken::class, 'password', [
   'used_for' => VerifyToken::PASSWORD,

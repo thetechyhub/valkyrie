@@ -49,13 +49,4 @@ function lazyLoadPage(ComponentName) {
   });
 
   return AsyncHandler;
-  // return Promise.resolve({
-  //   functional: true,
-  //   render(h, { data, children }) {
-  //     // Transparently pass any props or children
-  //     // to the view component.
-  //     console.log("Rendering...");
-  //     return h(AsyncHandler, data, children);
-  //   }
-  // });
 }

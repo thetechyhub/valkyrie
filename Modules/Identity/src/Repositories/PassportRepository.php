@@ -3,9 +3,15 @@
 namespace Modules\Identity\Repositories;
 
 use Zttp\Zttp as Http;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Psr\Http\Message\ServerRequestInterface;
+
 use Modules\Core\Helpers\Response;
 use Laravel\Passport\Passport;
 use Laravel\Passport\RefreshTokenRepository;
+
+use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 class PassportRepository {
 
@@ -18,25 +24,27 @@ class PassportRepository {
 	public static function createAccessToken($attributes){
 
 		self::revokeAccessTokensFor($attributes['user_id'], $attributes['client_id']);
-		
-		$response = Http::asFormParams()
-			->withoutVerifying()
-			->post(route('passport.token'), [
-				'grant_type' => 'password',
-				'client_id' => $attributes['client_id'],
-				'client_secret' => $attributes['client_secret'],
-				'username' => $attributes['email'],
-				'password' => $attributes['password'],
-				'scope' => '*',
-			]);
 
-		if (!$response->isOk()) {
-			return Response::unauthorized([
-				'message' => 'Email or password is incorrect',
-				"description" => $response->json(),
-			]);
+		$attributes['grant_type'] = 'password';
+		$attributes['scope'] = '*';
+		$attributes['username'] = $attributes['email'];
+
+		$request = resolve(ServerRequestInterface::class);
+		$request = $request->withParsedBody($attributes);
+
+		$accessTokenController = resolve(AccessTokenController::class);
+		$response = $accessTokenController->issueToken($request);
+		
+
+		if ($response->status() != 200) {
+			return [
+				"status" => $response->status(),
+				"message" => "Email or password is incorrect",
+				"description" => $response->content()
+			];
 		}
-		return $response->json();
+
+		return json_decode($response->content(), true);
 	}
 
 	/**
@@ -68,25 +76,25 @@ class PassportRepository {
 	 */
 	public static function refreshAccessToken($attributes){
 
-		$response = Http::asFormParams()
-			->withoutVerifying()
-			->post(route('passport.token'), [
-				'grant_type' => 'refresh_token',
-				'client_id' => $attributes['client_id'],
-				'client_secret' => $attributes['client_secret'],
-				'refresh_token' => $attributes['refresh_token'],
-				'scope' => '*',
-			]);
+		$attributes['grant_type'] = 'refresh_token';
+		$attributes['scope'] = '*';
+
+		$request = resolve(ServerRequestInterface::class);
+		$request = $request->withParsedBody($attributes);
+
+		$accessTokenController = resolve(AccessTokenController::class);
+		$response = $accessTokenController->issueToken($request);
 
 
-		if (!$response->isOk()) {
-			return Response::unauthorized([
-				'message' => 'Email or password is incorrect',
-				"description" => $response->json(),
-			]);
+			if ($response->status() != 200) {
+			return [
+				"status" => $response->status(),
+				"message" => "Email or password is incorrect",
+				"description" => $response->content()
+			];
 		}
-		
-		return $response->json();
+
+		return json_decode($response->content(), true);
 	}
 
 	/**
